@@ -1,19 +1,19 @@
 //const express = require('express');
-const bodyParser = require ('body-parser');
+/*const bodyParser = require ('body-parser');
 const mongoose = require('mongoose');
-const dishRouter = require('fastify') ({
+const fastify = require('fastify') ({
   logger: {
     prettyPrint: true
   }
 });
-const Dishes = require('../models/dishes');
+const Dishes = require('../models/dishes');*/
 
 //const dishRouter = express.Router();
 
 //dishRouter.use(bodyParser.json());
 
-dishRouter
-.get('/',(req, res, next) =>{
+/*dishRouter = function(fastify,opts,next){
+fastify.get('/',(req, res, next) =>{
   Dishes.find({})
   .then((dishes) => {
     res.statusCode = 200;
@@ -44,9 +44,11 @@ dishRouter
     res.json(resp);
   },(err) =>next(err))
   .catch((err)=> next(err));
-});
-dishRouter
-.get('/:dishId',(req, res, next) => {
+})};
+
+
+dishRouter = function(fastify,opts,next){
+fastify.get('/:dishId',(req, res, next) => {
   Dishes.findById(req.params.dishId)
   .then((dish) => {
     res.statusCode = 200;
@@ -78,10 +80,10 @@ dishRouter
     res.json(resp);
   }, (err) =>next(err))
   .catch((err) => next(err));
-});
+})};
 
-dishRouter
-.get('/:dishId/comments',(req, res, next) =>{
+dishRouter = function(fastify,opts,next){
+fastify.get('/:dishId/comments',(req, res, next) =>{
   Dishes.findById(req.params.dishId)
   .then((dish) => {
     if (dish != null) {
@@ -145,9 +147,9 @@ dishRouter
     }
   },(err) =>next(err))
   .catch((err)=> next(err));
-});
-dishRouter
-.get('/:dishId/comments/:commentId',(req, res, next) => {
+})};
+dishRouter = function(fastify,opts,next){
+fastify.get('/:dishId/comments/:commentId',(req, res, next) => {
   Dishes.findById(req.params.dishId)
   .then((dish) => {
     if (dish != null && dish.comments.id(req.params.commentId) != null) {
@@ -229,6 +231,19 @@ dishRouter
       }
   },(err) =>next(err))
   .catch((err)=> next(err));
-});
+})};
 
+module.exports = dishRouter;
+*/
+
+async function dishRouter (fastify, options, next) {
+  fastify.get('/', async (request, reply) => {
+    return { hello: 'world' }
+  })
+  .post('/', async (request,reply) => {
+    return { post: 'Post Hello World'}
+  })
+
+  next();
+}
 module.exports = dishRouter;
