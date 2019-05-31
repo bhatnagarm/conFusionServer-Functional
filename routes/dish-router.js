@@ -1,18 +1,18 @@
-//const express = require('express');
-/*const bodyParser = require ('body-parser');
+// Const express = require('express');
+/* const bodyParser = require ('body-parser');
 const mongoose = require('mongoose');
 const fastify = require('fastify') ({
   logger: {
     prettyPrint: true
   }
 });
-const Dishes = require('../models/dishes');*/
+const Dishes = require('../models/dishes'); */
 
-//const dishRouter = express.Router();
+// const dishRouter = express.Router();
 
-//dishRouter.use(bodyParser.json());
+// dishRouter.use(bodyParser.json());
 
-/*dishRouter = function(fastify,opts,next){
+/* dishRouter = function(fastify,opts,next){
 fastify.get('/',(req, res, next) =>{
   Dishes.find({})
   .then((dishes) => {
@@ -235,15 +235,22 @@ fastify.get('/:dishId/comments/:commentId',(req, res, next) => {
 
 module.exports = dishRouter;
 */
+// Const bodyParser = require('body-parser')
+// Const mongoose = require('mongoose')
+// Const Dishes = require('../models/dishes')
 
-async function dishRouter (fastify, options, next) {
-  fastify.get('/', async (request, reply) => {
-    return { hello: 'world' }
-  })
-  .post('/', async (request,reply) => {
-    return { post: 'Post Hello World'}
-  })
-
-  next();
+module.exports = async fastify => {
+	fastify
+		.get('/dishes', async () => {
+			return {hello: 'world'}
+		})
+		.post('/dishes', async () => {
+			return {post: 'Post Hello World'}
+		})
+		.put('/dishes', async reply => {
+			return 'PUT operation is not supported on /dishes'
+		})
+		.delete('/dishes', async () => {
+			return 'Delete Opertion called'
+		})
 }
-module.exports = dishRouter;
